@@ -21,6 +21,7 @@ gem 'responders', '~> 2.0'
 
 # as supported databases
 gem 'pg'
+gem 'mysql2'
 
 # for tracking data changes
 gem 'paper_trail'

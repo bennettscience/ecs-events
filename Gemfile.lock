@@ -125,7 +125,6 @@ GEM
       simplecov
     coderay (1.1.1)
     concurrent-ruby (1.1.7)
-    connection_pool (2.2.2)
     countable-rails (0.0.1)
       railties (>= 3.1)
     countries (3.0.0)
@@ -299,6 +298,7 @@ GEM
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mysql2 (0.5.3)
     nenv (0.3.0)
     netrc (0.11.0)
     nio4r (2.5.4)
@@ -654,6 +654,7 @@ DEPENDENCIES
   mina
   mini_magick
   money-rails
+  mysql2
   nokogiri (>= 1.8.1)
   omniauth
   omniauth-discourse
