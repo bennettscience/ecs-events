@@ -179,3 +179,4 @@
           = word_pluralize(@conference.program.speakers.confirmed.count, 'Speaker')
         - @conference.program.speakers.confirmed.each do |speaker|
           = link_to image_tag(speaker.gravatar_url(size: '25'), title: "#{speaker.name}!", class: 'img-circle'), user_path(speaker)
+

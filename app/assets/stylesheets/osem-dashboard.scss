@@ -2,6 +2,7 @@
 
 .dashbox span.fa {
   line-height: 1.1em;
+  font-family: sans-serif;
   @include breakpoint(sm) {
     font-size: 3em;
   }

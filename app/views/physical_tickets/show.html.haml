@@ -30,16 +30,21 @@
         %br
         = @user.email
     .col-md-5.col-md-offset-2.box.well
-      - if @conference.picture?
-        = image_tag(@conference.picture.ticket.url, class: 'img-responsive')
-      - else
-        = image_tag('/img/osem-logo.png', class: 'img-responsive')
+      %h3.text-center
+        Workshop Registrations
       %p.text-left
         %br
-        %strong
-          Organization
+        - if @registration.events.any?
+          %strong
+            Your registrations
+          %ul
+            - @registration.events.sort{|event| event.time}.each do |event|
+              %li
+                #{time_only_with_timezone(event.time)}: #{link_to event.title, conference_program_proposal_path(@conference.short_title, event.id)}, #{event.room.name}
+        - else
+          %strong
+            You have not registered for any workshops
         %br
-        = @conference.organization.name
     .col-md-5.box.well
       %p.text-left
         %strong
