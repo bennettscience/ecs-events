@@ -11,7 +11,7 @@
       required: true
 
 - if @conference.program.events.with_registration_open.any? || @registration.events.any?
-  = f.inputs 'Pre-registration required for the following:' do
+  = f.inputs 'Please register for your workshops:' do
 
     -# TODO: This needs to be easier to use.
     %p

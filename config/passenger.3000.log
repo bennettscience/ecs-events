@@ -1,0 +1,32 @@
+[ N 2020-12-03 09:56:37.6940 24190/T1 age/Wat/WatchdogMain.cpp:1373 ]: Starting Passenger watchdog...
+[ N 2020-12-03 09:56:37.7184 24194/T1 age/Cor/CoreMain.cpp:1340 ]: Starting Passenger core...
+[ N 2020-12-03 09:56:37.7186 24194/T1 age/Cor/CoreMain.cpp:256 ]: Passenger core running in multi-application mode.
+[ N 2020-12-03 09:56:37.7257 24194/T1 age/Cor/CoreMain.cpp:1015 ]: Passenger core online, PID 24194
+2020/12/03 09:56:39 [error] 24207#0: *4 "/var/www/html/osem/config/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "HEAD / HTTP/1.1", host: "0.0.0.0"
+[ N 2020-12-03 09:56:40.3426 24194/Td age/Cor/SecurityUpdateChecker.h:519 ]: Security update check: no update found (next check in 24 hours)
+
+[ N 2020-12-03 09:57:22.9603 24194/T6 age/Cor/CoreMain.cpp:671 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ N 2020-12-03 09:57:22.9603 24194/T1 age/Cor/CoreMain.cpp:1246 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ N 2020-12-03 09:57:22.9603 24194/T9 Ser/Server.h:902 ]: [ServerThr.2] Freed 0 spare client objects
+[ N 2020-12-03 09:57:22.9604 24194/T9 Ser/Server.h:558 ]: [ServerThr.2] Shutdown finished
+[ N 2020-12-03 09:57:22.9605 24194/T6 Ser/Server.h:902 ]: [ServerThr.1] Freed 0 spare client objects
+[ N 2020-12-03 09:57:22.9605 24194/T6 Ser/Server.h:558 ]: [ServerThr.1] Shutdown finished
+[ N 2020-12-03 09:57:22.9606 24194/Tb Ser/Server.h:902 ]: [ApiServer] Freed 0 spare client objects
+[ N 2020-12-03 09:57:22.9607 24194/Tb Ser/Server.h:558 ]: [ApiServer] Shutdown finished
+[ N 2020-12-03 09:57:23.4953 24194/T1 age/Cor/CoreMain.cpp:1325 ]: Passenger core shutdown finished
+[ N 2020-12-03 09:57:29.9002 24318/T1 age/Wat/WatchdogMain.cpp:1373 ]: Starting Passenger watchdog...
+[ N 2020-12-03 09:57:29.9174 24321/T1 age/Cor/CoreMain.cpp:1340 ]: Starting Passenger core...
+[ N 2020-12-03 09:57:29.9175 24321/T1 age/Cor/CoreMain.cpp:256 ]: Passenger core running in multi-application mode.
+[ N 2020-12-03 09:57:29.9242 24321/T1 age/Cor/CoreMain.cpp:1015 ]: Passenger core online, PID 24321
+2020/12/03 09:57:32 [error] 24334#0: *4 "/var/www/html/osem/config/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "HEAD / HTTP/1.1", host: "0.0.0.0"
+[ N 2020-12-03 09:57:32.5308 24321/T5 age/Cor/SecurityUpdateChecker.h:519 ]: Security update check: no update found (next check in 24 hours)
+
+[ N 2020-12-03 09:57:41.1597 24321/T8 age/Cor/CoreMain.cpp:671 ]: Signal received. Gracefully shutting down... (send signal 2 more time(s) to force shutdown)
+[ N 2020-12-03 09:57:41.1598 24321/T1 age/Cor/CoreMain.cpp:1246 ]: Received command to shutdown gracefully. Waiting until all clients have disconnected...
+[ N 2020-12-03 09:57:41.1598 24321/T8 Ser/Server.h:902 ]: [ServerThr.1] Freed 0 spare client objects
+[ N 2020-12-03 09:57:41.1598 24321/T8 Ser/Server.h:558 ]: [ServerThr.1] Shutdown finished
+[ N 2020-12-03 09:57:41.1599 24321/Tc Ser/Server.h:902 ]: [ApiServer] Freed 0 spare client objects
+[ N 2020-12-03 09:57:41.1599 24321/Tc Ser/Server.h:558 ]: [ApiServer] Shutdown finished
+[ N 2020-12-03 09:57:41.1601 24321/Ta Ser/Server.h:902 ]: [ServerThr.2] Freed 0 spare client objects
+[ N 2020-12-03 09:57:41.1601 24321/Ta Ser/Server.h:558 ]: [ServerThr.2] Shutdown finished
+[ N 2020-12-03 09:57:41.6924 24321/T1 age/Cor/CoreMain.cpp:1325 ]: Passenger core shutdown finished

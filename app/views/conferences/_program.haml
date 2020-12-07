@@ -11,8 +11,7 @@
         .col-md-12
           %p.lead.text-center
             %span.notranslate
-              = conference.title.html_safe
-            will have an enaging program!
+              Choose workshops in these tracks
 
       - unless highlights.blank?
         = render 'highlights', conference_id: conference.short_title,
@@ -33,7 +32,7 @@
               = link_to(events_conference_schedule_path(conference.short_title),
                 class: 'btn btn-success btn-lg') do
                 Full Schedule
-    .trapezoid
+
 
 - unless booths.blank?
   - booths.each do |booth|

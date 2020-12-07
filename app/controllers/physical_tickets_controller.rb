@@ -15,13 +15,14 @@ class PhysicalTicketsController < ApplicationController
 
   def show
     @file_name = "ticket_for_#{@conference.short_title}.pdf"
+    @registration = Registration.find_by(conference: @conference, user: current_user)
     @user = @physical_ticket.user
     @ticket_layout = @conference.ticket_layout.to_sym
     @qrcode_image = RQRCode::QRCode.new(@physical_ticket.token).as_png(size: 180, border_modules: 0)
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = TicketPdf.new(@conference, @user, @physical_ticket, @ticket_layout, @file_name)
+        pdf = TicketPdf.new(@conference, @user, @registration, @physical_ticket, @ticket_layout, @file_name)
         send_data pdf.render,
                   filename:    @file_name,
                   type:        'application/pdf',

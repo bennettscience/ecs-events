@@ -32,6 +32,11 @@
     }
     .dropdown-menu {
         min-width: 225px;
+
+	span.fa {
+	    width: 10px;
+	    margin-right: 10px
+	}
     }
 
     &.navbar-default {

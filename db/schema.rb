@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answers", force: :cascade do |t|
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "booth_requests", force: :cascade do |t|
+  create_table "booth_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "booth_id"
     t.integer "user_id"
     t.string "role"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["user_id"], name: "index_booth_requests_on_user_id"
   end
 
-  create_table "booths", force: :cascade do |t|
+  create_table "booths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.text "reasoning"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cfps", force: :cascade do |t|
+  create_table "cfps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.datetime "created_at"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.boolean "enable_registrations", default: false
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", limit: 50, default: ""
     t.text "body"
     t.integer "commentable_id"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "commercials", force: :cascade do |t|
+  create_table "commercials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "commercial_id"
     t.string "commercial_type"
     t.integer "commercialable_id"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.string "url"
   end
 
-  create_table "conferences", force: :cascade do |t|
+  create_table "conferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "guid", null: false
     t.string "title", null: false
     t.string "short_title", null: false
@@ -111,12 +111,12 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["organization_id"], name: "index_conferences_on_organization_id"
   end
 
-  create_table "conferences_questions", id: false, force: :cascade do |t|
+  create_table "conferences_questions", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.integer "question_id"
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "social_tag"
     t.string "email"
     t.string "facebook"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.string "blog"
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
+  create_table "delayed_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "difficulty_levels", force: :cascade do |t|
+  create_table "difficulty_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.string "color"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.integer "program_id"
   end
 
-  create_table "email_settings", force: :cascade do |t|
+  create_table "email_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.boolean "send_on_registration", default: false
     t.boolean "send_on_accepted", default: false
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.text "submitted_proposal_body"
   end
 
-  create_table "event_schedules", force: :cascade do |t|
+  create_table "event_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "event_id"
     t.integer "schedule_id"
     t.integer "room_id"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["schedule_id"], name: "index_event_schedules_on_schedule_id"
   end
 
-  create_table "event_types", force: :cascade do |t|
+  create_table "event_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.integer "length", default: 30
     t.integer "minimum_abstract_length", default: 0
@@ -224,7 +224,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at"
   end
 
-  create_table "event_users", force: :cascade do |t|
+  create_table "event_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
     t.string "event_role", default: "participant", null: false
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "guid", null: false
     t.integer "event_type_id"
     t.string "title", null: false
@@ -259,14 +259,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.integer "comments_count", default: 0, null: false
   end
 
-  create_table "events_registrations", force: :cascade do |t|
+  create_table "events_registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "registration_id"
     t.integer "event_id"
     t.boolean "attended", default: false, null: false
     t.datetime "created_at"
   end
 
-  create_table "lodgings", force: :cascade do |t|
+  create_table "lodgings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "photo_file_name"
@@ -280,7 +280,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.string "picture"
   end
 
-  create_table "openids", force: :cascade do |t|
+  create_table "openids", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "provider"
     t.string "email"
     t.string "uid"
@@ -289,14 +289,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at"
   end
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "organizations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.string "picture"
     t.text "code_of_conduct"
   end
 
-  create_table "payments", force: :cascade do |t|
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "last4"
     t.integer "amount"
     t.string "authorization_code"
@@ -307,7 +307,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "physical_tickets", force: :cascade do |t|
+  create_table "physical_tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "ticket_purchase_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["token"], name: "index_physical_tickets_on_token", unique: true
   end
 
-  create_table "programs", force: :cascade do |t|
+  create_table "programs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.integer "rating", default: 0
     t.boolean "schedule_public", default: false
@@ -331,25 +331,25 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["selected_schedule_id"], name: "index_programs_on_selected_schedule_id"
   end
 
-  create_table "qanswers", force: :cascade do |t|
+  create_table "qanswers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "question_id"
     t.integer "answer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "qanswers_registrations", id: false, force: :cascade do |t|
+  create_table "qanswers_registrations", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "registration_id", null: false
     t.integer "qanswer_id", null: false
   end
 
-  create_table "question_types", force: :cascade do |t|
+  create_table "question_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "questions", force: :cascade do |t|
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.integer "question_type_id"
     t.integer "conference_id"
@@ -358,7 +358,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at"
   end
 
-  create_table "registration_periods", force: :cascade do |t|
+  create_table "registration_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.date "start_date"
     t.date "end_date"
@@ -366,7 +366,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at"
   end
 
-  create_table "registrations", force: :cascade do |t|
+  create_table "registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -378,12 +378,12 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.boolean "accepted_code_of_conduct"
   end
 
-  create_table "registrations_vchoices", id: false, force: :cascade do |t|
+  create_table "registrations_vchoices", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "registration_id"
     t.integer "vchoice_id"
   end
 
-  create_table "resources", force: :cascade do |t|
+  create_table "resources", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "quantity"
@@ -391,7 +391,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.integer "conference_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -402,7 +402,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["name"], name: "index_roles_on_name"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "guid", null: false
     t.string "name", null: false
     t.integer "size"
@@ -411,7 +411,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.integer "order"
   end
 
-  create_table "schedules", force: :cascade do |t|
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -420,7 +420,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["track_id"], name: "index_schedules_on_track_id"
   end
 
-  create_table "splashpages", force: :cascade do |t|
+  create_table "splashpages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.boolean "public"
     t.boolean "include_tracks"
@@ -442,7 +442,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.boolean "shuffle_highlights", default: false, null: false
   end
 
-  create_table "sponsors", force: :cascade do |t|
+  create_table "sponsors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "website_url"
@@ -454,7 +454,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.string "picture"
   end
 
-  create_table "sponsorship_levels", force: :cascade do |t|
+  create_table "sponsorship_levels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.integer "conference_id"
     t.datetime "created_at"
@@ -462,14 +462,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.integer "position"
   end
 
-  create_table "subscriptions", force: :cascade do |t|
+  create_table "subscriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "conference_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "survey_questions", force: :cascade do |t|
+  create_table "survey_questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "survey_id"
     t.string "title"
     t.integer "kind", default: 0
@@ -479,7 +479,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.boolean "mandatory", default: false
   end
 
-  create_table "survey_replies", force: :cascade do |t|
+  create_table "survey_replies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "survey_question_id"
     t.integer "user_id"
     t.text "text"
@@ -487,14 +487,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "survey_submissions", force: :cascade do |t|
+  create_table "survey_submissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "surveys", force: :cascade do |t|
+  create_table "surveys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "title"
@@ -507,7 +507,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["surveyable_type", "surveyable_id"], name: "index_surveys_on_surveyable_type_and_surveyable_id"
   end
 
-  create_table "ticket_purchases", force: :cascade do |t|
+  create_table "ticket_purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "ticket_id"
     t.integer "conference_id"
     t.boolean "paid", default: false
@@ -519,13 +519,13 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.float "amount_paid", default: 0.0
   end
 
-  create_table "ticket_scannings", force: :cascade do |t|
+  create_table "ticket_scannings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "physical_ticket_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tickets", force: :cascade do |t|
+  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.string "title", null: false
     t.text "description"
@@ -537,7 +537,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.boolean "visible", default: true
   end
 
-  create_table "tracks", force: :cascade do |t|
+  create_table "tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "guid", null: false
     t.string "name", null: false
     t.text "description"
@@ -559,7 +559,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["submitter_id"], name: "index_tracks_on_submitter_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -599,18 +599,18 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "users_roles", force: :cascade do |t|
+  create_table "users_roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "role_id"
     t.integer "user_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
   end
 
-  create_table "vchoices", force: :cascade do |t|
+  create_table "vchoices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "vday_id"
     t.integer "vposition_id"
   end
 
-  create_table "vdays", force: :cascade do |t|
+  create_table "vdays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.date "day"
     t.text "description"
@@ -618,7 +618,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.datetime "updated_at"
   end
 
-  create_table "venues", force: :cascade do |t|
+  create_table "venues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "guid"
     t.string "name"
     t.string "website"
@@ -636,7 +636,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.string "picture"
   end
 
-  create_table "versions", force: :cascade do |t|
+  create_table "versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
     t.string "event", null: false
@@ -650,7 +650,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.index ["organization_id"], name: "index_versions_on_organization_id"
   end
 
-  create_table "votes", force: :cascade do |t|
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "event_id"
     t.integer "rating"
     t.datetime "created_at"
@@ -658,7 +658,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_181602) do
     t.integer "user_id"
   end
 
-  create_table "vpositions", force: :cascade do |t|
+  create_table "vpositions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
     t.string "title", null: false
     t.text "description"

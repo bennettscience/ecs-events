@@ -40,6 +40,11 @@ module ApplicationHelper
     time.strftime('%F %R') + ' ' + @conference.timezone.to_s
   end
 
+  # Returns on the time with conference timezone
+  def time_only_with_timezone(time)
+    time.strftime('%r')
+  end
+
   # Set resource_name for devise so that we can call the devise help links (views/devise/shared/_links) from anywhere (eg sign_up form in proposals#new)
   def resource_name
     :user
