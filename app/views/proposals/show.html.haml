@@ -50,6 +50,8 @@
           %small Thanks for helping with #{@conference.title}!
         - @event.volunteers.each do |volunteer|
           = render 'volunteer_info', speaker: volunteer, show_bio: false
+      = render 'chat_embed_wrapper'
+
 
     .col-md-9
       .row

@@ -54,6 +54,7 @@
 //= require selectize
 //= require bootstrap-select
 //= require osem-survey
+//= require yt-chat-embed
 
 $(document).ready(function() {
     $('a[disabled=disabled]').click(function(event){
