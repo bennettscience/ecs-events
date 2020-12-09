@@ -6,6 +6,10 @@
   section {
     padding-top: 60px;
     padding-bottom: 60px;
+    font-size: 1.2em;
+    .thumbnail {
+      height: 300px;
+    }
   }
 
   section:nth-child(even) {
@@ -22,6 +26,9 @@
 
   .cta-button {
     padding-top: 30px;
+    a {
+       background-color: #6c7ed6 !important;
+    }
   }
 
   #banner{
@@ -33,7 +40,7 @@
     padding-bottom: 100px;
     .container {
       #header  {
-        background-color: rgba(224, 224, 224,.80);
+        background-color: rgba(224, 224, 224, 1);
         padding-top: 20px;
         padding-bottom: 20px;
       }
@@ -46,9 +53,6 @@
     }
     .track {
       padding: 20px;
-    }
-    .track:hover{
-      background-color: #F0FFFF;
     }
   }
 
@@ -63,7 +67,7 @@
 
   #venue {
     padding-top: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 60px;
     #venue-pic {
       margin-top: 20px;
     }
@@ -127,6 +131,9 @@
     }
     a{
       padding-left: 100px;
+    }
+    a:hover {
+      text-decoration: none;
     }
     a:nth-child(-n+1) {
       padding-left: 0px;

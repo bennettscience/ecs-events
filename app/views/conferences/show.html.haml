@@ -31,18 +31,16 @@
       call_for_booths: @call_for_booths,
       event_types: @event_types, tracks: @track_names
 
-  - if @conference.splashpage.include_program
-    = render 'program', conference: @conference, tracks: @tracks,
-      highlights: @highlights, booths: @booths
-
   -# attendance/registration
   - if @conference.splashpage.include_registrations
     - if @conference.registration_open?
       = render 'registration', conference: @conference,
         registration_period: @conference.registration_period,
         tickets: @tickets, conference_id: @conference.short_title
-  - if @conference.splashpage.include_tickets && @conference.tickets.any?
-    = render 'tickets', conference: @conference, tickets: @tickets
+
+  - if @conference.splashpage.include_program
+    = render 'program', conference: @conference, tracks: @tracks,
+      highlights: @highlights, booths: @booths
 
   -# geo
   - if @conference.splashpage.include_venue && @conference.venue

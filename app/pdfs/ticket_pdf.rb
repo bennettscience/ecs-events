@@ -3,11 +3,12 @@
 require 'open-uri'
 
 class TicketPdf < Prawn::Document
-  def initialize(conference, user, physical_ticket, ticket_layout, file_name)
+  def initialize(conference, user, registration, physical_ticket, ticket_layout, file_name)
     super(page_layout: ticket_layout, page_size: 'A4', filename: file_name)
     @user = user
     @physical_ticket = physical_ticket
     @conference = conference
+    @registration = registration
 
     @left = bounds.left
     @right = bounds.right
@@ -15,10 +16,28 @@ class TicketPdf < Prawn::Document
     @mid_horizontal = (bounds.right - bounds.left) / 2
     @x = 0
 
-    draw_first_square
-    draw_second_square
-    draw_third_square
-    draw_fourth_square
+    new_ticket
+#    draw_first_square
+#    draw_second_square
+#    draw_third_square
+#    draw_fourth_square
+  end
+  
+  def new_ticket
+    draw_text @conference.title.to_s, at: [@x, cursor - 30], size: 18
+    draw_text @user.name.to_s, at: [@x, cursor - 50], size: 12
+    
+    move_down 120 
+    table_data = [] 
+    text "Registrations", style: :bold, color: "001133"
+    header = ["Time", "Workshop", "Room"]
+    table_data << header
+    sorted = @registration.events.sort_by{|event| [event.time]}
+
+    sorted.map do |event|
+      table_data << [event.time.strftime('%r'), event.title, event.room.name]
+    end
+    table(table_data)
   end
 
   def draw_first_square
@@ -75,6 +94,9 @@ class TicketPdf < Prawn::Document
     end
     move_up 130
     move_down @mid_vertical
+
+
+
   end
 
   def draw_third_square
