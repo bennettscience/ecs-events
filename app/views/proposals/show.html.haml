@@ -104,10 +104,10 @@
               %dd
                 %span.label{style: "background-color: #{@event.track.color}; color: #{ contrast_color(@event.track.color) }"}
                   = @event.track.name
-          - if @event.difficulty_level
-            .col-md-12
-              %dt Difficulty:
-              %dd
+          .col-md-12
+            %dt Grade level:
+            %dd
+              - if @event.difficulty_level
                 %span.label{style: "background-color: #{@event.difficulty_level.color}; color: #{ contrast_color(@event.difficulty_level.color) };"}
                   = @event.difficulty_level.title
 
