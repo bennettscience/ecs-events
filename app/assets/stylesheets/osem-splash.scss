@@ -80,10 +80,6 @@
         #venue-pic {
             margin-top: 20px;
         }
-        // The venue section has less padding.
-        .trapezoid {
-            top: $trapezoid-height;
-        }
     }
 
     #lodging {
@@ -145,7 +141,7 @@
     }
 
     #social-media {
-        background: none repeat scroll 0 0 #0c3559;
+        background: none repeat scroll 0 0 $navbar-default-bg;
         padding: 50px 20px;
         i {
             color: #fff;
