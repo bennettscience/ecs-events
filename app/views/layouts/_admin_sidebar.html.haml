@@ -80,7 +80,7 @@
               = link_to 'Event Types', admin_conference_program_event_types_path(@conference.short_title)
           - if can? :update, @conference.program.difficulty_levels.build, conference_id: @conference.id
             %li{class: active_nav_li(admin_conference_program_difficulty_levels_path(@conference.short_title))}
-              = link_to 'Difficulty Levels', admin_conference_program_difficulty_levels_path(@conference.short_title)
+              = link_to 'Grade Levels', admin_conference_program_difficulty_levels_path(@conference.short_title)
           - if can? :update, @conference.program.schedules.build
             %li{class: active_nav_li(admin_conference_schedules_path(@conference.short_title))}
               = link_to 'Schedules', admin_conference_schedules_path(@conference.short_title)

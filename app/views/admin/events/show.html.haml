@@ -91,7 +91,7 @@
               %td{ 'class' => class_for_todo(progress_status['track']) }
                 %span{ 'class' => [icon_for_todo(progress_status['track']), 'fa-lg'] }
           %tr
-            %td= link_to 'Add a difficulty level', edit_admin_conference_program_event_path(@event.program.conference.short_title, @event)
+            %td= link_to 'Add a grade level', edit_admin_conference_program_event_path(@event.program.conference.short_title, @event)
             %td{ 'class' => class_for_todo(progress_status['difficulty_level']) }
               %span{ 'class' => [icon_for_todo(progress_status['difficulty_level']), 'fa-lg'] }
     #proposal-commercials.tab-pane
