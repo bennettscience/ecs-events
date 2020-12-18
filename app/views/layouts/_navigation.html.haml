@@ -15,17 +15,14 @@
         %span.icon-bar
       = nav_root_link_for(conference)
 
-    <!-- TODO: Remove SnapCon logo from nav -->
     .collapse.navbar-collapse#main-nav
       - if content_for :splash_nav
         %ul.nav.navbar-nav#splash-nav
           = content_for :splash_nav
           %li
-            = link_to 'https://snap.berkeley.edu', target: '_blank' do
-              Snap
+            = link_to 'https://pd.elkhart.k12.in.us', target: '_blank' do
+              Elkhart PD
               %em> !
-          %li
-            = link_to 'Forum', 'https://forum.snap.berkeley.edu', target: '_blank'
       -if user_signed_in?
         .btn-group.pull-right
           %ul.nav.navbar-nav.navbar-right

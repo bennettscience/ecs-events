@@ -89,7 +89,7 @@ module EventsHelper
   end
 
   def difficulty_dropdown(event, difficulties, conference_id)
-    selection = event.difficulty_level.try(:title) || 'Difficulty'
+    selection = event.difficulty_level.try(:title) || 'Grade level'
     options = difficulties.collect do |difficulty|
       [
         difficulty.title,

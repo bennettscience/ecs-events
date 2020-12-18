@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-SNAPCON_BCC_ADDRESS = 'messages@snap.berkeley.edu'
+ECS_BCC_ADDRESS = 'pd+events@elkhart.k12.in.us'
 YTLF_TICKET_ID = 50
 
 class Mailbot < ActionMailer::Base
   def registration_mail(conference, user)
     mail(to:      user.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.registration_subject,
          body:    conference.email_settings.generate_email_on_conf_updates(conference,
@@ -30,7 +30,7 @@ class Mailbot < ActionMailer::Base
     end
 
     mail(to:            @user.email,
-         bcc:           SNAPCON_BCC_ADDRESS,
+         bcc:           ECS_BCC_ADDRESS,
          from:          @conference.contact.email,
          template_name: template_name,
          subject:       "#{@conference.title} | Ticket Confirmation and PDF!")
@@ -40,7 +40,7 @@ class Mailbot < ActionMailer::Base
     conference = event.program.conference
 
     mail(to:      event.submitter.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.accepted_subject,
          body:    conference.email_settings.generate_event_mail(event, conference.email_settings.accepted_body))
@@ -50,7 +50,7 @@ class Mailbot < ActionMailer::Base
     conference = event.program.conference
 
     mail(to:      event.submitter.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.submitted_proposal_subject,
          body:    conference.email_settings.generate_event_mail(event, conference.email_settings.submitted_proposal_body))
@@ -60,7 +60,7 @@ class Mailbot < ActionMailer::Base
     conference = event.program.conference
 
     mail(to:      event.submitter.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.rejected_subject,
          body:    conference.email_settings.generate_event_mail(event, conference.email_settings.rejected_body))
@@ -70,7 +70,7 @@ class Mailbot < ActionMailer::Base
     conference = event.program.conference
 
     mail(to:      event.submitter.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.confirmed_without_registration_subject,
          body:    conference.email_settings.generate_event_mail(event,
@@ -79,7 +79,7 @@ class Mailbot < ActionMailer::Base
 
   def conference_date_update_mail(conference, user)
     mail(to:      user.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.conference_dates_updated_subject,
          body:    conference.email_settings.generate_email_on_conf_updates(conference,
@@ -89,7 +89,7 @@ class Mailbot < ActionMailer::Base
 
   def conference_registration_date_update_mail(conference, user)
     mail(to:      user.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.conference_registration_dates_updated_subject,
          body:    conference.email_settings.generate_email_on_conf_updates(conference,
@@ -99,7 +99,7 @@ class Mailbot < ActionMailer::Base
 
   def conference_venue_update_mail(conference, user)
     mail(to:      user.email,
-         bcc:     SNAPCON_BCC_ADDRESS,
+         bcc:     ECS_BCC_ADDRESS,
          from:    conference.contact.email,
          subject: conference.email_settings.venue_updated_subject,
          body:    conference.email_settings.generate_email_on_conf_updates(conference,
