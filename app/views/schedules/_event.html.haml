@@ -1,32 +1,38 @@
 .panel.panel-default.event-panel{ onClick: 'eventClicked(event, this);', "data-url" => "#{url_for(conference_program_proposal_path(@conference.short_title, event.id))}" }
-  .panel-body
+  - header_color = event.track&.color || '#f5f5f5'
+  .panel-heading{ style: "background-color: #{header_color}; color: #{ contrast_color(header_color) }; border-radius: 4px" }
     - event.speakers_ordered.each do |speaker|
-      = image_tag speaker.gravatar_url, :class => "img-circle pull-right all-speaker-pic", |
-                                        :alt => speaker.name, |
-                                        :title => speaker.name |
+      = image_tag speaker.profile_picture, class: "img-circle pull-right",  alt: speaker.name, style: "padding: 2px;"
 
     %p
       = canceled_replacement_event_label(event, event_schedule)
       = replacement_event_notice(event_schedule)
 
-    %span.h3
+    %span.h3{style: "margin-bottom: 14px"}
       = event.title
       %br
-      %small
+      %small{style: "color: #{contrast_color(header_color)}"}
         = event.subtitle
+
+
+  .panel-body
     %h4
       - if(event.speakers.any?)
         presented by #{event.speaker_names}
+    %h5
+      = join_event_link(event, current_user)
     %p
       = markdown(truncate(event.abstract, length: 400))
+      -# TODO: More informative text or aria-label.
       = link_to 'more', conference_program_proposal_path(@conference.short_title, event.id) if event.abstract.length > 400
     - if event_schedule.present?
-      %span.track
-        %span.fa.fa-clock-o
-        %span.label{ style: "background-color: grey" }
-          = event_schedule.start_time.strftime('%H:%M')
-          \-
-          = event_schedule.end_time.strftime('%H:%M')
+      = inyourtz(event_schedule.start_time) do
+        %span.track
+          %span.fa.fa-clock-o
+          %span.label{ style: "background-color: grey" }
+            = event_schedule.start_time.strftime('%l:%M %P')
+            \-
+            = event_schedule.end_time.strftime('%l:%M %P')
       %span.track
         %span.fa.fa-map-marker
         %span.label{ style: "background-color: grey" }

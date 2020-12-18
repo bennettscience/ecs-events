@@ -6,6 +6,9 @@
 
     = speaker_selector_input f
 
+    - if current_user.manages_volunteers?(@conference)
+      = volunteer_selector_input f
+
     = track_selector_input f
 
     = f.input :event_type_id, as: :select,
@@ -29,7 +32,7 @@
       %span{ class: 'help-block select-help-text collapse event_difficulty_level_id', id: "#{difficulty_level.id}-help" }
         = difficulty_level.description
 
-    = f.input :abstract, required: true, input_html: { rows: 5, data: { provide: 'markdown-editable' } },
+    = f.input :abstract, required: true, input_html: { rows: 5, data: { provide: 'markdown' } },
       hint: markdown_hint('[Tips to improve your presentations.](http://blog.hubspot.com/blog/tabid/6307/bid/5975/10-Rules-to-Instantly-Improve-Your-Presentations.aspx)')
 
     %p
@@ -67,8 +70,8 @@
 
 :javascript
   $(document).ready(function() {
-    $('#event_speaker_ids').selectize({
+    $('.js-userSelector').selectize({
       plugins: ['remove_button'],
-      maxItems: 5
-    } )
+      maxItems: 100
+    })
   });

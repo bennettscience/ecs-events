@@ -18,6 +18,9 @@ class Event < ApplicationRecord
   has_one :submitter_event_user, -> { where(event_role: 'submitter') }, class_name: 'EventUser'
   has_one  :submitter, through: :submitter_event_user, source: :user
 
+  has_many :volunteer_event_users, -> { where(event_role: 'volunteer') }, class_name: 'EventUser'
+  has_many :volunteers, through: :volunteer_event_users, source: :user
+
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
   has_many :commercials, as: :commercialable, dependent: :destroy
@@ -31,6 +34,8 @@ class Event < ApplicationRecord
   belongs_to :track
   belongs_to :difficulty_level
   belongs_to :program
+  belongs_to :room
+  delegate :url, to: :room, allow_nil: true
 
   accepts_nested_attributes_for :event_users, allow_destroy: true
   accepts_nested_attributes_for :speakers, allow_destroy: true
@@ -270,6 +275,14 @@ class Event < ApplicationRecord
   end
 
   ##
+  # Returns the start time at which this event is scheduled
+  #
+  def happening_now?
+    event_schedules.find_by(schedule_id: selected_schedule_id).try(:happening_now?)
+  end
+
+
+  ##
   # Returns true or false, if the event is already over or not
   #
   # ====Returns
@@ -284,6 +297,10 @@ class Event < ApplicationRecord
 
   def conference
     program.conference
+  end
+
+  def <=>(other)
+    time <=> other.time
   end
 
   private

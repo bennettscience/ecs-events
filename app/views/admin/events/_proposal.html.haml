@@ -35,7 +35,7 @@
             = track_dropdown(@event, @tracks, @conference.short_title)
         %tr
           %td
-            %b Difficulty
+            %b Grade
           %td
             = difficulty_dropdown(@event, @difficulty_levels, @conference.short_title)
         %tr
@@ -85,6 +85,11 @@
                   (
                   = link_to speaker.email, "mailto: #{speaker.email}"
                   )
+        %tr
+          %td
+            %b Volunteers
+          %td
+            = volunteer_links(@event)
         %tr
           %td
             %b Biographies

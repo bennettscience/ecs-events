@@ -74,7 +74,7 @@ module ApplicationHelper
     Comment.accessible_by(current_ability).find_since_last_login(user)
   end
 
-  # Recieves a PaperTrail::Version object
+  # Receives a PaperTrail::Version object
   # Outputs the list of attributes that were changed in the version (ignoring changes from one blank value to another)
   # Eg: If version.changeset = '{"title"=>[nil, "Premium"], "description"=>[nil, "Premium = Super cool"], "conference_id"=>[nil, 3]}'
   # Output will be 'title, description and conference'
@@ -117,7 +117,7 @@ module ApplicationHelper
         concurrent_events << other_event_schedule.event
       end
     end
-    concurrent_events
+    concurrent_events.sort_by { |event_schedule| event_schedule.room&.order }
   end
 
   def speaker_links(event)
@@ -126,6 +126,16 @@ module ApplicationHelper
 
   def speaker_selector_input(form)
     user_selector_input(:speakers, form, '', true)
+  end
+
+  def volunteer_links(event)
+    safe_join(event.volunteers.map do |volunteer|
+      link_to(volunteer.name, admin_user_path(volunteer))
+    end, ', ')
+  end
+
+  def volunteer_selector_input(form)
+    user_selector_input(:volunteers, form, '', true)
   end
 
   def responsibles_selector_input(form)
@@ -149,7 +159,7 @@ module ApplicationHelper
         (form.object.send(field)&.map(&:id) || form.object.send(field)&.id)
       ),
       input_html:    {
-        class:       'select-help-toggle',
+        class:       'select-help-toggle js-userSelector',
         multiple:    multiple,
         placeholder: (multiple ? 'Select users...' : 'Select a user...')
       }
@@ -183,18 +193,21 @@ module ApplicationHelper
     'hidden' if Date.today > conference.end_date
   end
 
-  def nav_root_link_for(conference)
-    link_text = (
-      conference.try(:organization).try(:name) ||
-      ENV['OSEM_NAME'] ||
-      'OSEM'
-    )
+  # TODO:Snap!Con: Replace this with a search for a conference logo.
+  def nav_root_link_for(conference = nil)
+    path = conference&.id.present? ? conference_path(conference) : root_path
     link_to(
-      link_text,
-      root_path,
+      image_tag('ecs-logo.png'),
+      path,
       class: 'navbar-brand',
-      title: 'Open Source Event Manager'
+      title: nav_link_text(conference)
     )
+  end
+
+  def nav_link_text(conference)
+    conference.try(:organization).try(:name) ||
+    ENV['OSEM_NAME'] ||
+    'OSEM'
   end
 
   # returns the url to be used for logo on basis of sponsorship level position
@@ -209,6 +222,17 @@ module ApplicationHelper
       end
     else
       object.picture.large.url
+    end
+  end
+
+  # Embed links with a localized timezone URL
+  # Timestamps are stored at UTC but in the real timezone.
+  # We must convert then shift the time back to get the correct value.
+  def inyourtz(time, timezone = 'GMT', &block)
+    time = time.in_time_zone(timezone)
+    time -= time.utc_offset
+    link_to "https://inyourtime.zone/t?#{time.to_i}", target: '_blank' do
+      block.call
     end
   end
 end

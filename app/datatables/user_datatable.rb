@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 class UserDatatable < AjaxDatatablesRails::Base
@@ -13,6 +14,7 @@ class UserDatatable < AjaxDatatablesRails::Base
       confirmed_at: { source: 'User.confirmed_at', searchable: false },
       email:        { source: 'User.email' },
       name:         { source: 'User.name' },
+      username:     { source: 'User.username' },
       attended:     { source: 'attended_count', searchable: false },
       roles:        { source: 'Role.name' },
       view_url:     { source: 'User.id', searchable: false, orderable: false },
@@ -29,6 +31,7 @@ class UserDatatable < AjaxDatatablesRails::Base
         confirmed_at: record.confirmed_at,
         email:        record.email,
         name:         record.name,
+        username:     record.username,
         attended:     record.attended_count,
         roles:        record.roles.any? ? show_roles(record.get_roles) : 'None',
         view_url:     admin_user_path(record),
@@ -47,12 +50,14 @@ class UserDatatable < AjaxDatatablesRails::Base
   end
   # rubocop:enable Naming/AccessorMethodName
 
+  # Workaround for jbox-web/ajax-datatables-rails#293
   def records_total_count
-    fetch_records.unscope(:group).count(:all)
+    fetch_records.unscope(:group, :select).count(:all)
   end
 
+  # Workaround for jbox-web/ajax-datatables-rails#293
   def records_filtered_count
-    filter_records(fetch_records).unscope(:group).count(:all)
+    filter_records(fetch_records).unscope(:group, :select).count(:all)
   end
 
   # ==== These methods represent the basic operations to perform on records

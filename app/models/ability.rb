@@ -31,7 +31,7 @@ class Ability
       event.state == 'confirmed'
     end
 
-    can [:show, :events, :app], Schedule do |schedule|
+    can [:show, :events, :happening_now, :app], Schedule do |schedule|
       schedule.program.schedule_public
     end
 
@@ -87,7 +87,9 @@ class Ability
     end
 
     can :index, Organization
-    can :index, Ticket
+    can :index, Ticket do |ticket|
+      ticket.visible
+    end
     can :manage, TicketPurchase, user_id: user.id
     can [:new, :create], Payment, user_id: user.id
     can [:index, :show], PhysicalTicket, user: user

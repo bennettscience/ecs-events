@@ -9,7 +9,7 @@ prawn_document(force_download: true, filename: "#{@file_name}.pdf", page_layout:
                   'Speaker Email',
                   'Event Type',
                   'Track',
-                  'Difficulty Level',
+                  'Grade Level',
                   'Room',
                   'State'
                  ]

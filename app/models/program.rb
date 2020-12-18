@@ -20,7 +20,7 @@ class Program < ApplicationRecord
     end
 
     def with_registration_open
-      select { |e| e if e.registration_possible? }
+      select { |e| e if e.registration_possible? }.sort
     end
 
     # All confirmed events of the conference with attribute require_registration
@@ -85,7 +85,7 @@ class Program < ApplicationRecord
 
       event_schedules += track.selected_schedule.event_schedules
     end
-    event_schedules.sort_by(&:start_time)
+    event_schedules.sort_by(&:sortable_timestamp)
   end
 
   ##

@@ -24,7 +24,7 @@ module Admin
 
       respond_to do |format|
         format.html
-        # Explicity call #to_json to avoid the use of EventSerializer
+        # Explicitly call #to_json to avoid the use of EventSerializer
         format.json { render json: Event.where(state: :confirmed, program: @program).to_json }
         format.xlsx do
           response.headers['Content-Disposition'] = "attachment; filename=\"#{@file_name}.xlsx\""
@@ -180,7 +180,7 @@ module Admin
                                     :track_id, :state, :language, :is_highlight, :max_attendees,
                                     # Not used anymore?
                                     :proposal_additional_speakers, :user, :users_attributes,
-                                    speaker_ids: [])
+                                    speaker_ids: [], volunteer_ids: [])
     end
 
     def comment_params

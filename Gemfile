@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby ENV['OSEM_RUBY_VERSION'] || '2.5.0'
+ruby '~> 2.5.0'
 
 # rails-assets requires >= 1.8.4
 if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.8.4')
@@ -10,7 +10,7 @@ if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.8.4')
 end
 
 # as web framework
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -20,8 +20,8 @@ gem 'puma', '~> 3.0'
 gem 'responders', '~> 2.0'
 
 # as supported databases
-gem 'mysql2'
 gem 'pg'
+gem 'mysql2'
 
 # for tracking data changes
 gem 'paper_trail'
@@ -38,8 +38,8 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'devise_ichain_authenticatable'
 
-# for openID authentication
 gem 'omniauth'
+gem 'omniauth-discourse'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
@@ -82,7 +82,7 @@ gem 'formtastic-bootstrap'
 
 # as the JavaScript library
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'jquery-ui-rails', '~> 6.0.1'
 
 # for languages validation
 gem 'iso-639'
@@ -117,8 +117,8 @@ end
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 # data tables
+gem 'jquery-datatables'
 gem 'ajax-datatables-rails'
-gem 'jquery-datatables-rails'
 
 # for charts
 gem 'chartkick'
@@ -143,8 +143,7 @@ gem 'rqrcode'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails'
 
-# as error catcher
-gem 'airbrake'
+gem 'sentry-raven'
 
 # to make links faster
 gem 'turbolinks'
@@ -233,6 +232,8 @@ group :development do
   gem 'rubocop-rspec'
   # to open mails
   gem 'letter_opener'
+  # view mail at /letter_opener/
+  gem 'letter_opener_web', '~> 1.0'
   # as deployment system
   gem 'mina'
   # as debugger on error pages
@@ -247,7 +248,6 @@ group :test do
   gem 'database_cleaner'
   gem 'geckodriver-helper'
   gem 'rspec-rails'
-  gem 'transactional_capybara'
   gem 'webdrivers'
   # for measuring test coverage
   gem 'codecov', require: false

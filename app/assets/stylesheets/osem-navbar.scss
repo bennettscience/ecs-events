@@ -1,4 +1,6 @@
-@import "breakpoints.scss";
+@import 'breakpoints.scss';
+@import 'osem-variables.scss';
+
 .nav-osem {
     border: none;
     @include breakpoint(xs) {
@@ -8,6 +10,10 @@
         }
         .navbar-nav > li > a {
             color: black;
+            &:hover,
+            &:focus {
+                background-color: rgba(255, 255, 255, 0.75) !important;
+            }
         }
         .navbar-collapse.in {
             overflow: hidden;
@@ -29,12 +35,37 @@
         }
     }
     .dropdown-menu {
-        padding: 17px;
         min-width: 225px;
 
-	span.fa {
-	    width: 10px;
-	    margin-right: 10px
-	}
+        span.fa {
+            width: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    &.navbar-default {
+        .navbar-nav > .open > a {
+            &:hover,
+            &:focus {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+        .navbar-nav > li > a {
+            &:hover,
+            &focus {
+                background-color: rgba(255, 255, 255, 0.75) !important;
+            }
+        }
+    }
+
+    .navbar-brand img {
+        margin-top: -5px;
+        max-height: 100%;
+    }
+
+    .profile-thumbnail {
+        border-radius: 3px;
+        max-height: 20px;
+        max-width: 20px;
     }
 }

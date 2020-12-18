@@ -12,7 +12,7 @@ wb.add_worksheet(name: 'all events') do |sheet|
          'Speaker Email',
          'Event Type',
          'Track',
-         'Difficulty Level',
+         'Grade Level',
          'Room',
          'State']
   sheet.add_row row, style: bold_style

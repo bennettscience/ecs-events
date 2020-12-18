@@ -28,11 +28,11 @@ class Registration < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :conference_id, message: 'already Registered!' }
   validate :registration_limit_not_exceed, on: :create
-  validate :registration_to_events_only_if_present
-
   validates :accepted_code_of_conduct, acceptance: {
     if: -> { conference.try(:code_of_conduct).present? }
   }
+
+  validate :user_has_registration_ticket, if: -> { conference.registration_ticket_required? }
 
   after_create :set_week, :subscribe_to_conference, :send_registration_mail
 
@@ -47,19 +47,6 @@ class Registration < ApplicationRecord
   end
 
   private
-
-  ##
-  # If the user registers to attend events that are already scheduled,
-  # only allow registration to events if the user will be present
-  # (based on arrival and departure attributes)
-  # No validation if arrival/departure attributes are empty
-  def registration_to_events_only_if_present
-    if (arrival || departure) && events.pluck(:start_time).any?
-      errors.add(:arrival, 'is too late! You cannot register for events that take place before your arrival') if events.pluck(:start_time).compact.map { |x| x < arrival }.any?
-
-      errors.add(:departure, 'is too early! You cannot register for events that take place after your departure') if events.pluck(:start_time).compact.map { |x| x > departure }.any?
-    end
-  end
 
   def subscribe_to_conference
     Subscription.create(conference_id: conference.id, user_id: user.id)
@@ -78,6 +65,15 @@ class Registration < ApplicationRecord
   def registration_limit_not_exceed
     if conference.registration_limit > 0 && conference.registrations.count >= conference.registration_limit
       errors.add(:base, 'Registration limit exceeded')
+    end
+  end
+
+  def user_has_registration_ticket
+    return if TicketPurchase.where(user: user, ticket: conference.registration_tickets).paid.any?
+
+    errors.add(:base, 'You must purchase a registration ticket before registering')
+    if TicketPurchase.where(user: user, ticket: conference.registration_tickets).unpaid.any?
+      errors.add(:base, 'You currently have a ticket with an unfinished purchase')
     end
   end
 end

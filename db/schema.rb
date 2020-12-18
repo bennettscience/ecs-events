@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_195810) do
+ActiveRecord::Schema.define(version: 2020_07_16_181602) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -104,6 +107,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_195810) do
     t.integer "ticket_layout", default: 0
     t.string "custom_domain"
     t.integer "booth_limit", default: 0
+    t.text "custom_css"
     t.index ["organization_id"], name: "index_conferences_on_organization_id"
   end
 
@@ -364,8 +368,6 @@ ActiveRecord::Schema.define(version: 2018_11_13_195810) do
 
   create_table "registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "conference_id"
-    t.datetime "arrival"
-    t.datetime "departure"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "other_special_needs"
@@ -405,6 +407,8 @@ ActiveRecord::Schema.define(version: 2018_11_13_195810) do
     t.string "name", null: false
     t.integer "size"
     t.integer "venue_id", null: false
+    t.string "url"
+    t.integer "order"
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -530,6 +534,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_195810) do
     t.boolean "registration_ticket", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "visible", default: true
   end
 
   create_table "tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -587,6 +592,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_195810) do
     t.boolean "is_admin", default: false
     t.string "username"
     t.boolean "is_disabled", default: false
+    t.string "picture"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -639,7 +645,9 @@ ActiveRecord::Schema.define(version: 2018_11_13_195810) do
     t.text "object_changes"
     t.datetime "created_at"
     t.integer "conference_id"
+    t.bigint "organization_id"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["organization_id"], name: "index_versions_on_organization_id"
   end
 
   create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

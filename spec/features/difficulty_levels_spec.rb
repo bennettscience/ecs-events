@@ -14,16 +14,16 @@ feature DifficultyLevel do
                 conference_id: conference.short_title)
 
       # Add difficulty level
-      click_link 'Add Difficulty Level'
+      click_link 'Add Grade Level'
 
       fill_in 'difficulty_level_title', with: 'Hard'
       fill_in 'difficulty_level_description', with: 'Life is the hardest'
       page.find('#difficulty_level_color').set('#ff0000')
 
-      click_button 'Create Difficulty level'
+      click_button 'Create Grade level'
       page.find('#flash')
       # Validations
-      expect(flash).to eq('Difficulty level successfully created.')
+      expect(flash).to eq('Grade level successfully created.')
       within('table#difficulty_levels') do
         expect(page.has_content?('Hard')).to be true
         expect(page.has_content?('Life is the hardest')).to be true
@@ -47,7 +47,7 @@ feature DifficultyLevel do
       page.find('#flash')
 
       # Validations
-      expect(flash).to eq('Difficulty level successfully deleted.')
+      expect(flash).to eq('Grade level successfully deleted.')
       within('table#difficulty_levels') do
         expect(page.assert_selector('tr', count: 4)).to be true
         expect(page.has_content?('Easy Events')).to be true

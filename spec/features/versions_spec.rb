@@ -277,9 +277,9 @@ feature 'Version' do
     conference_commercial.destroy
 
     visit admin_revision_history_path
-    expect(page).to have_text("Someone (probably via the console) created new commercial in conference #{conference.short_title}")
-    expect(page).to have_text("Someone (probably via the console) updated url of commercial in conference #{conference.short_title}")
-    expect(page).to have_text("Someone (probably via the console) deleted commercial in conference #{conference.short_title}")
+    expect(page).to have_text("Someone (probably via the console) created new materials in conference #{conference.short_title}")
+    expect(page).to have_text("Someone (probably via the console) updated url of materials in conference #{conference.short_title}")
+    expect(page).to have_text("Someone (probably via the console) deleted materials in conference #{conference.short_title}")
   end
 
   scenario 'display changes in event commercials', feature: true, versioning: true, js: true do
@@ -288,9 +288,9 @@ feature 'Version' do
     event_commercial.destroy
 
     visit admin_revision_history_path
-    expect(page).to have_text("Someone (probably via the console) created new commercial in event #{event_with_commercial.title} in conference #{conference.short_title}")
-    expect(page).to have_text("Someone (probably via the console) updated url of commercial in event #{event_with_commercial.title} in conference #{conference.short_title}")
-    expect(page).to have_text("Someone (probably via the console) deleted commercial in event #{event_with_commercial.title} in conference #{conference.short_title}")
+    expect(page).to have_text("Someone (probably via the console) created new materals in event #{event_with_commercial.title} in conference #{conference.short_title}")
+    expect(page).to have_text("Someone (probably via the console) updated url of materials in event #{event_with_commercial.title} in conference #{conference.short_title}")
+    expect(page).to have_text("Someone (probably via the console) deleted materials in event #{event_with_commercial.title} in conference #{conference.short_title}")
   end
 
   scenario 'display changes in event commercials in event history', feature: true, versioning: true, js: true do
@@ -299,10 +299,10 @@ feature 'Version' do
 
     visit admin_conference_program_event_path(conference.short_title, event_with_commercial)
     click_link 'History'
-    expect(page).to have_text('Someone (probably via the console) created new commercial')
+    expect(page).to have_text('Someone (probably via the console) created new materials')
     visit admin_conference_program_event_path(conference.short_title, event_without_commercial)
     click_link 'History'
-    expect(page).to have_no_text('Someone (probably via the console) created new commercial')
+    expect(page).to have_no_text('Someone (probably via the console) created new materials')
   end
 
   scenario 'display changes in organization', feature: true, versioning: true, js: true do
@@ -318,17 +318,14 @@ feature 'Version' do
   end
 
   context 'organization role', feature: true, versioning: true, js: true do
+    let!(:organization_admin) { create(:organization_admin, organization: conference.organization) }
     let!(:user) { create(:user) }
-    let!(:role) do
-      Role.find_by(
-        resource_id:   conference.organization.id,
-        resource_type: 'Organization'
-      )
-    end
 
     setup do
       user.add_role :organization_admin, conference.organization
       user.remove_role :organization_admin, conference.organization
+
+      sign_in organization_admin
       visit admin_revision_history_path
     end
 
@@ -376,7 +373,7 @@ feature 'Version' do
     EventsRegistration.create(registration: registration, event: event)
     EventsRegistration.first.update_attributes(attended: true)
     EventsRegistration.last.destroy
-    # Here registration is deleted to ensure the event registration related change still displays the asociated user's name
+    # Here registration is deleted to ensure the event registration related change still displays the associated user's name
     registration.destroy
 
     visit admin_revision_history_path
@@ -392,7 +389,7 @@ feature 'Version' do
     click_link 'Comments (0)'
     fill_in 'comment_body', with: 'Sample comment'
     click_button 'Add Comment'
-    TransactionalCapybara::AjaxHelpers.wait_for_ajax(page)
+    expect(page).to have_text('Comments (1)')
     Comment.last.destroy
     PaperTrail::Version.last.reify.save
 

@@ -89,7 +89,7 @@ module EventsHelper
   end
 
   def difficulty_dropdown(event, difficulties, conference_id)
-    selection = event.difficulty_level.try(:title) || 'Difficulty'
+    selection = event.difficulty_level.try(:title) || 'Grade level'
     options = difficulties.collect do |difficulty|
       [
         difficulty.title,
@@ -171,6 +171,49 @@ module EventsHelper
       ),
       class: 'switch-checkbox'
     )
+  end
+
+  def join_event_link(event, current_user)
+    # TODO: Should this take in an event_schedule?
+    return unless event.url.present? && current_user
+
+    conference = event.conference
+    is_now = event.happening_now?
+
+    if current_user.roles.where(id: conference.roles).any?
+      # Show Pre-Event links for any memeber of the conference team.
+      link_to("Join Live Event #{'(Admin link)' unless is_now}",
+                      event.url, target: '_blank')
+    elsif current_user.registered_to_event?(conference)
+      if is_now
+        link_to('Join Live Event', event.url, target: '_blank')
+      else
+        link_to('(Live Event Link Available During Event)', '#')
+      end
+    end
+  end
+
+  def calendar_timestamp(timestamp, timezone)
+    timestamp = timestamp.in_time_zone('GMT')
+    timestamp -= timestamp.utc_offset
+    timestamp.strftime('%Y%m%dT%H%M%S')
+  end
+
+  def google_calendar_link(event_schedule)
+    event = event_schedule.event
+    conference = event.conference
+    calendar_base = 'https://www.google.com/calendar/render'
+    start_timestamp = calendar_timestamp(event_schedule.start_time, conference.timezone)
+    end_timestamp = calendar_timestamp(event_schedule.end_time, conference.timezone)
+    event_details = {
+      action: 'TEMPLATE',
+      text: "#{event.title} at #{conference.title}",
+      details: "#{conference.title}:\n\n#{event.room&.url}\n\n#{truncate(event.abstract, length: 200)}",
+      location: "#{event.room.name} #{event.room&.url}",
+      dates: "#{start_timestamp}/#{end_timestamp}",
+      ctz: event_schedule.timezone
+    }
+    "#{calendar_base}?#{event_details.to_param}"
   end
 
   private

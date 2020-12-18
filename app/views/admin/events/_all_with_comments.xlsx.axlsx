@@ -13,7 +13,7 @@ wb.add_worksheet(name: 'events with comments') do |sheet|
          'Speaker Email',
          'Event Type',
          'Track',
-         'Difficulty Level',
+         'Grade Level',
          'Room',
          'State',
          'Comments']
