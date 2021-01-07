@@ -40,20 +40,6 @@
       - if @event.commercials.any?
         - @event.commercials.each do |commercial|
           = render 'chat_embed_wrapper', video: commercial
-      - if @event.speakers.any?
-        %h3
-          Presented by:
-        - @speakers_ordered.each do |speaker|
-          = render 'speaker_info', speaker: speaker
-      / end speakers.
-      - if @event.volunteers.any?
-        %h3
-          Volunteer Hosts
-          %br
-          %small Thanks for helping with #{@conference.title}!
-        - @event.volunteers.each do |volunteer|
-          = render 'volunteer_info', speaker: volunteer, show_bio: false
-
 
     .col-md-7
       .row
