@@ -53,6 +53,12 @@ class Commercial < ApplicationRecord
 
   private
 
+  def self.extract_id(url)
+    regex = /(v=)(.*)/
+    result = url.match(regex)[2]
+    { html: result }
+  end
+
   def valid_url
     result = Commercial.render_from_url(url)
     if result[:error]
