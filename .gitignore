@@ -41,3 +41,4 @@ docker-compose.override.yml
 .buildconfig
 osem_development
 osem_test
+node_modules
