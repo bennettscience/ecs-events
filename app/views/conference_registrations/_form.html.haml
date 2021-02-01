@@ -13,9 +13,9 @@
             =link_to('#signup', role: 'tab', "aria-controls" => "home", "data-toggle" => "tab") do
               = ENV['OSEM_NAME'] || 'OSEM'
               Account
-          %span.pull-right#account-already
-            =link_to('#signin', role: 'tab', "aria-controls" => "home", "data-toggle" => "tab") do
-              Already have an account?
+          -# %span.pull-right#account-already
+          -#   =link_to('#signin', role: 'tab', "aria-controls" => "home", "data-toggle" => "tab") do
+          -#     Already have an account?
       .tab-content
         .tab-pane.active{role: 'tabpanel', id: 'signup'}
           = semantic_form_for(@registration, url: conference_conference_registration_path(@conference.short_title)) do |f|
@@ -29,7 +29,7 @@
                   - if @conference.user_registered?(current_user)
                     = f.action :submit, button_html: { value: 'Update Registration', class: 'btn btn-primary' }
                   - else
-                    = f.action :submit, button_html: { value: 'Register', class: 'btn btn-primary', id: 'register' }
+                    = link_to('Register', conference_conference_registration_path(@conference), class: 'btn btn-primary')
 
         .tab-pane{role: 'tabpanel', id: 'signin'}
           = render partial: 'devise/shared/sign_in_form_embedded'

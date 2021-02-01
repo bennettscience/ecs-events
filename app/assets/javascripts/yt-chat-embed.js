@@ -3,8 +3,9 @@
 
 window.onload = () => {
     let wrapper = document.querySelector(`.chat-embed-wrapper`);  
-    console.log(wrapper)
+    if(!wrapper) return
     let videoId = wrapper.dataset.videoId;
+    if(!videoId) return
     let frame = document.createElement(`iframe`);   
     frame.src = `http://localhost:5000/chat/${videoId}`;   
     frame.id = `chat-embed`;  

@@ -54,7 +54,7 @@ class ConferenceRegistrationsController < ApplicationController
     if @registration.save
       # Sign in the new user
       unless current_user
-        sign_in(@registration.user)
+        redirect_to sign_in(@registration.user)
       end
 
       if @conference.tickets.visible.any? && !current_user.supports?(@conference)

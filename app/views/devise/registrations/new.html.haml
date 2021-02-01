@@ -4,7 +4,12 @@
       .panel.panel-default
         .panel-heading
           %h3.panel-title
-            Sign Up
+            ECS Events Sign Up
+        .panel-body
+          = render partial: 'devise/shared/openid'
+        .panel-heading
+          %h3.panel-title
+            Non-ECS Users
         .panel-body
           = semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
             = f.input :username, input_html: { required: true }, hint: 'This is how the other users see you, not your real name'
@@ -16,6 +21,4 @@
               = recaptcha_tags
             %p.text-right
               = f.action :submit, as: :button, label: 'Sign Up', button_html: { class: 'btn btn-success' }
-
-          = render partial: 'devise/shared/openid'
           = render partial: 'devise/shared/help'
