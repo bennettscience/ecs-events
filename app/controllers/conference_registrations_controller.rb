@@ -7,15 +7,20 @@ class ConferenceRegistrationsController < ApplicationController
   before_action :set_registration, only: [:edit, :update, :destroy, :show]
 
   def new
-    @registration = Registration.new(conference_id: @conference.id)
-
-    # Redirect to registration edit when user is already registered
-    if @conference.user_registered?(current_user)
-      # Authorization needs to happen in every action before the return statement
-      # We authorize the #edit action, since we redirect to it
-      authorize! :edit, current_user.registrations.find_by(conference_id: @conference.id)
-      redirect_to edit_conference_conference_registration_path(@conference.short_title)
+    if !current_user
+      redirect_to sign_in_path
       return
+    else
+      @registration = Registration.new(conference_id: @conference.id)
+
+      # Redirect to registration edit when user is already registered
+      if @conference.user_registered?(current_user)
+        # Authorization needs to happen in every action before the return statement
+        # We authorize the #edit action, since we redirect to it
+        authorize! :edit, current_user.registrations.find_by(conference_id: @conference.id)
+        redirect_to edit_conference_conference_registration_path(@conference.short_title)
+        return
+      end
     end
 
     if !@conference.registration_open? || @conference.registration_limit_exceeded?
@@ -54,7 +59,7 @@ class ConferenceRegistrationsController < ApplicationController
     if @registration.save
       # Sign in the new user
       unless current_user
-        redirect_to sign_in(@registration.user)
+        sign_in(@registration.user)
       end
 
       if @conference.tickets.visible.any? && !current_user.supports?(@conference)
