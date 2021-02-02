@@ -11,12 +11,12 @@
       required: true
 
 - if @conference.program.events.with_registration_open.any? || @registration.events.any?
-  = f.inputs 'Please register for your workshops:' do
+  = f.inputs 'Some events require registration:' do
 
     -# TODO: This needs to be easier to use.
     %p
+      The events in this list require pre-registration. You can choose some now or come back later. 
       You are registered for #{pluralize(@registration.events.count, 'event')}.
-      They are at the end of this list.
     - @registration.events_ordered.each do |event|
       = render 'conference_registrations/event', event: event, event_schedule: event.event_schedules.first
 
