@@ -16,6 +16,7 @@
     -# TODO: This needs to be easier to use.
     %p
       The events in this list require pre-registration. You can choose some now or come back later. 
+    %p  
       You are registered for #{pluralize(@registration.events.count, 'event')}.
     - @registration.events_ordered.each do |event|
       = render 'conference_registrations/event', event: event, event_schedule: event.event_schedules.first
