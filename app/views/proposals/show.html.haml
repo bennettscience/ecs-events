@@ -41,7 +41,7 @@
         - @event.commercials.each do |commercial|
           = render 'chat_embed_wrapper', video: commercial
 
-    .col-md-7
+    %div{ :class => (@event.commercials.any? ? "col-md-7" : "col-md-12")}
       .row
         .col-md-12
           .lead
