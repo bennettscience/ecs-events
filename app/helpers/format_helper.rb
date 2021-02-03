@@ -180,7 +180,7 @@ module FormatHelper
     (schedule == @selected_schedule) ? 'Yes' : 'No'
   end
 
-  def markdown(text, escape_html=true)
+  def markdown(text, escape_html=false)
     return '' if text.nil?
 
     options = {

@@ -22,7 +22,7 @@
     %h5
       = join_event_link(event, current_user)
     %p
-      = markdown(truncate(event.abstract, length: 400))
+      = markdown(truncate(event.abstract, length: 400, escape: false))
       -# TODO: More informative text or aria-label.
       = link_to 'more', conference_program_proposal_path(@conference.short_title, event.id) if event.abstract.length > 400
     - if event_schedule.present?
