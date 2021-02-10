@@ -79,7 +79,7 @@
             %dd
               - if @event.room
                 - if !@event.room.url.empty?
-                  = link_to 'Join ' + @event.room.name, @event.room.url
+                  = link_to 'Join ' + @event.room.name, @event.room.url, target: '_blank'
                 - else
                   = @event.room.name
           .col-md-12
