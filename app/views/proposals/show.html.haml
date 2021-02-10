@@ -27,7 +27,7 @@
         - if @event_schedule&.start_time
           = link_to google_calendar_link(@event_schedule), target: '_blank', class: 'btn btn-success btn-mini' do
             %i.fa.fa-calendar
-            Add to Google Calendar (beta)
+            Add to Google Calendar
         - if can?(:update, @event) && @event.require_registration?
           = link_to 'Registrations', registrations_conference_program_proposal_path(@conference.short_title, @event), class: 'btn btn-mini btn-success'
         - if can?(:edit, @event)
@@ -78,7 +78,10 @@
             %dt Room:
             %dd
               - if @event.room
-                = @event.room.name
+                - if !@event.room.url.empty?
+                  = link_to 'Join ' + @event.room.name, @event.room.url
+                - else
+                  = @event.room.name
           .col-md-12
             %dt Conference:
             %dd= link_to @event.program.conference.title, conference_path(@conference)
