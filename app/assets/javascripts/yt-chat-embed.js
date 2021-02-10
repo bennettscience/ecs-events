@@ -7,7 +7,7 @@ window.onload = () => {
     let videoId = wrapper.dataset.videoId;
     if(!videoId) return
     let frame = document.createElement(`iframe`);   
-    frame.src = `http://localhost:5000/chat/${videoId}`;   
+    frame.src = `https://ecs-chat.web.app/chat/${videoId}`;   
     frame.id = `chat-embed`;  
     wrapper.appendChild(frame); 
 }
