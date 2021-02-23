@@ -1,6 +1,3 @@
-// TODO: Load later in the script to avoid undefined containers
-// TODO: Load only on event pages with commercials
-
 window.onload = () => {
     let wrapper = document.querySelector(`.chat-embed-wrapper`);  
     if(!wrapper) return

@@ -107,6 +107,11 @@
               %dt Requires Registration:
               %dd
                 = link_to "Yes (#{registered_text(@event)})", new_conference_conference_registration_path(@conference.short_title), class: 'btn btn-xs btn-danger', disabled: !@event.registration_possible?
+          - if @surveys_after_event.any?
+            .col-md-12 
+              %dt Survey: 
+              %dd
+                = render partial: 'surveys/list', locals: { surveys: @surveys_after_event, conference: @conference }
           - if concurrent_events(@event).present?
             .col-md-12
               %hr
@@ -126,8 +131,3 @@
                       %dt Room:
                       %dd
                         = event.room.name
-      .row
-        .col-md-12
-          - if @surveys_after_event.any? && @event.ended?
-            .page-header
-            = render partial: 'surveys/list', locals: { surveys: @surveys_after_event, conference: @conference }

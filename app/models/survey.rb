@@ -32,4 +32,8 @@ class Survey < ActiveRecord::Base
       now <= end_date
     end
   end
+
+  def event
+    return surveyable_id
+  end
 end

@@ -40,6 +40,6 @@ class SurveysController < ApplicationController
       end
     end
 
-    redirect_back(fallback_location: root_path)
+    redirect_to conference_program_proposal_path(@conference, @survey.event)
   end
 end
