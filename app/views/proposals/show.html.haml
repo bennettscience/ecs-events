@@ -78,10 +78,10 @@
             %dt Room:
             %dd
               - if @event.room
-                - if !@event.room.url.empty?
+                - if !@event.room.url.empty? && current_user && @conference.user_registered?(current_user)
                   = link_to 'Join ' + @event.room.name, @event.room.url, target: '_blank'
                 - else
-                  = @event.room.name
+                  =link_to 'Register to join', conference_conference_registration_path(@conference.short_title)
           .col-md-12
             %dt Conference:
             %dd= link_to @event.program.conference.title, conference_path(@conference)
