@@ -16,15 +16,16 @@
       = nav_root_link_for(conference)
 
     .collapse.navbar-collapse#main-nav
+      %ul.nav.navbar-nav
+        %li
+          = link_to 'https://ecs-chat.web.app/rooms/hgyi1eFodB8JoEack8Ga', target: '_blank' do
+            Live Help
       - if content_for :splash_nav
         %ul.nav.navbar-nav#splash-nav
           = content_for :splash_nav
           %li
             = link_to 'https://pd.elkhart.k12.in.us', target: '_blank' do
               Elkhart PD
-          %li
-            = link_to 'https://ecs-chat.web.app/rooms/hgyi1eFodB8JoEack8Ga', target: '_blank' do
-              Live Help
       -if user_signed_in?
         .btn-group.pull-right
           %ul.nav.navbar-nav.navbar-right
