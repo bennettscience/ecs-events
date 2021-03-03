@@ -117,6 +117,7 @@ class Ability
 
     # can view and reply to a survey
     can [:index, :show, :reply], Survey, surveyable_type: 'Conference'
+    can [:index, :show, :reply], Survey, surveyable_type: 'Event'
     can [:index, :show, :reply], Survey, surveyable_type: 'Registration', surveyable_id: user.registrations.pluck(:conference_id)
 
     # TODO: this needs to check for more, eg.
